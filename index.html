@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Li Jingtian's 18th Prelude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 固定导航 -->
+  <header class="navbar" id="navbar">
+    <a class="nav-brand" href="#home" id="navBrand">Li Jingtian's 18th prelude</a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span></button>
+  </header>
+  <div class="overlay-menu" id="overlayMenu"></div>
+
+  <!-- 右侧章节指示圆点 -->
+  <div class="scene-dots" id="sceneDots"></div>
+
+  <main id="stage">
+
+    <!-- 第一幕：首页 · 雪山云海 -->
+    <section class="scene" id="home" data-scene="hero">
+      <div class="scene-bg"></div>
+      <div class="scene-veil"></div>
+      <div class="scene-content hero-content">
+        <h1 class="hero-title font-serif" id="heroTitle"></h1>
+        <p class="hero-cheers font-serif" id="heroCheers"></p>
+
+        <!-- 北京时间倒计时 -->
+        <div class="beijing-countdown" id="countdownWrap">
+          <p class="cd-label" id="cdLabel"></p>
+          <div class="cd-row">
+            <div class="cd-cell"><span id="cdDays">00</span><small>天</small></div>
+            <div class="cd-sep"></div>
+            <div class="cd-cell"><span id="cdHours">00</span><small>时</small></div>
+            <div class="cd-sep"></div>
+            <div class="cd-cell"><span id="cdMins">00</span><small>分</small></div>
+            <div class="cd-sep"></div>
+            <div class="cd-cell"><span id="cdSecs">00</span><small>秒</small></div>
+          </div>
+        </div>
+        <div class="birthday-msg font-serif" id="birthdayMsg" style="display:none">cheers to 18 years</div>
+
+        <p class="hero-tagline" id="heroTagline"></p>
+        <button class="next-btn" id="heroNextBtn"></button>
+      </div>
+    </section>
+
+    <!-- 第二幕：成长记录 · 地球 -->
+    <section class="scene" id="timeline" data-scene="timeline">
+      <div class="scene-bg"></div>
+      <div class="scene-veil"></div>
+      <div class="scene-content">
+        <div class="section-title rv">
+          <h2 class="font-serif">成长记录</h2>
+          <p class="section-sub">每一步都算数</p>
+        </div>
+        <div class="timeline-wrap rv" id="timelineWrap">
+          <div class="timeline" id="timelineList"></div>
+          <div class="tl-detail" id="tlDetail">
+            <div class="tl-detail-inner">
+              <div class="tl-detail-year font-serif" id="tlDetailYear"></div>
+              <h3 class="tl-detail-title" id="tlDetailTitle"></h3>
+              <p class="tl-detail-text" id="tlDetailText"></p>
+              <p class="tl-detail-hint">点击空白处返回</p>
+            </div>
+          </div>
+        </div>
+        <button class="next-btn" data-goto="2"></button>
+      </div>
+    </section>
+
+    <!-- 第三幕：Moments of 18 · 拾光集 · 银河系 -->
+    <section class="scene" id="photos" data-scene="photos">
+      <div class="scene-bg"></div>
+      <div class="scene-veil"></div>
+      <div class="scene-content">
+        <div class="section-title rv">
+          <h2 class="font-serif">Moments of 18 · 拾光集</h2>
+          <p class="section-sub">那些闪闪发光的瞬间</p>
+        </div>
+        <div class="photo-strip-wrap rv" id="photoStripWrap">
+          <div class="photo-strip" id="photoStrip"></div>
+        </div>
+        <div class="ps-active-cap" id="psActiveCap"></div>
+        <button class="next-btn" data-goto="3"></button>
+      </div>
+    </section>
+
+    <!-- 第四幕：锦天自白 · 黑洞 -->
+    <section class="scene" id="about" data-scene="about">
+      <div class="scene-bg"></div>
+      <div class="scene-veil"></div>
+      <div class="scene-content">
+        <div class="section-title rv">
+          <h2 class="font-serif">锦天自白</h2>
+          <p class="section-sub">十八而志，始赴新程</p>
+        </div>
+        <div class="about-card rv" id="aboutCard"></div>
+        <button class="next-btn" data-goto="4"></button>
+      </div>
+    </section>
+
+    <!-- 第五幕：旁人寄语 · 星云 -->
+    <section class="scene" id="survey" data-scene="survey">
+      <div class="scene-bg"></div>
+      <div class="scene-veil"></div>
+      <div class="scene-content">
+        <div class="section-title rv">
+          <h2 class="font-serif">旁人寄语</h2>
+          <p class="section-sub">完成问卷抽取小礼物</p>
+        </div>
+        <div class="survey-area rv" id="surveyArea"></div>
+        <p class="survey-foot" id="surveyFoot" style="display:none">
+          十八载风与光，因你而圆满
+          <a class="back-home" id="backHome" href="#home">返回首页</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 灯箱 -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose">&times;</button>
+    <button class="lb-nav lb-prev" id="lbPrev"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <img class="lb-img" id="lbImg" src="" alt="" />
+    <p class="lb-caption" id="lbCaption"></p>
+    <button class="lb-nav lb-next" id="lbNext"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
