@@ -351,9 +351,49 @@
             ${q.id <= 3 ? `<textarea name="q${q.id}" placeholder="${q.ph}" rows="3" required></textarea>`
                         : `<input type="text" name="q${q.id}" placeholder="${q.ph}" required />`}
           </div>`).join('')}
-        <button type="submit" class="sv-submit">封存寄语</button>
+        <button type="submit" class="sv-submit" id="svSubmit">封存寄语</button>
       </form>`;
-    $('#svForm').addEventListener('submit', (e) => { e.preventDefault(); renderSuccess(); });
+
+    $('#svForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = $('#svSubmit');
+
+      // 未配置接收邮箱时给出提示
+      if (!CONFIG.web3formsKey || CONFIG.web3formsKey === 'YOUR_ACCESS_KEY_HERE') {
+        alert('网站还没有配置接收邮箱，请先配置后再试');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '封存中...';
+
+      const fd = new FormData(e.target);
+      const a1 = fd.get('q1'), a2 = fd.get('q2'), a3 = fd.get('q3'), name = fd.get('q4');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: CONFIG.web3formsKey,
+            from_name: name,
+            subject: `【旁人寄语】来自 ${name} 的十八岁祝福`,
+            message: `在你眼中我是怎样的人：\n${a1}\n\n属于我们的难忘瞬间：\n${a2}\n\n赠我一句拾捌岁寄语：\n${a3}`
+          })
+        });
+        const json = await res.json();
+        if (json.success) {
+          renderSuccess();
+        } else {
+          throw new Error(json.message || '提交失败');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('提交失败，请稍后重试');
+        btn.disabled = false;
+        btn.textContent = '封存寄语';
+      }
+    });
     $('#backHome').addEventListener('click', (e) => { e.preventDefault(); goTo(0); });
   }
 
